@@ -1,0 +1,53 @@
+main {
+    width: fit-content;
+    margin: 40px auto 0;
+}
+main .insert-post {
+    background-color: #e0f1e2;
+    padding: 15px;
+    border: 2px solid #709d64;
+    border-radius: 10px;
+}
+main .insert-post input {
+    background-color: #f2f9f3;
+    border: 1px solid rgb(217, 217, 217);
+}
+main .insert-post button {
+    background-color: #f2f9f3;
+    border: 1px solid rgb(217, 217, 217);
+    padding: 2px 10px;
+}
+.posts {
+    margin: 3px 0;
+}
+.posts .post {
+    background-color: #b7ccfb;
+    margin: 3px 0;
+    padding: 5px 15px;
+    border: 2px solid #949dd2;
+    border-radius: 10px;
+}
+.posts .post h3 {
+    margin: 0;
+}
+.posts .post p {
+    background-color: #e3eaf6;
+    padding: 5px;
+    border-radius: 6px;
+    margin: 6px 0;
+}
+.posts .post .add-comment {
+    background-color: #e3eaf6;
+    padding: 3px;
+    border-radius: 6px;
+    margin: 6px 0;
+}
+.posts .post .add-comment input {
+    border: 1px solid rgb(217, 217, 217);
+    background-color: #edeff4;
+}
+.posts .post .add-comment button {
+    background-color: #edeff4;
+    border: 1px solid rgb(217, 217, 217);
+    padding: 2px 10px;
+}

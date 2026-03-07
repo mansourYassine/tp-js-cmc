@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <main>
+            <form action="" style="display: none;">
+                <div class="champs">
+                    <input type="text" name="code">
+                    <input type="text" name="nom">
+                    <input type="text" name="prenom">
+                    <input type="text" name="semestre">
+                    <input type="text" name="filiere">
+                </div>
+                <button type="button" onclick="ajouteEtudiant()">Ajouter</button>
+                <button type="button" onclick="annuler()">Annuler</button>
+            </form>
+            <p>Liste des étudiants</p>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Semestre</th>
+                        <th>Filière</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+            <button type="button" onclick="afficheFormulaire()">Ajouter</button>
+            <button type="button" onclick="supprimerEtudiant()">Supprimer</button>
+        </main>
+
+        <script src="main.js"></script>
+    </body>
+</html>

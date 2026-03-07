@@ -1,0 +1,12 @@
+body {
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+}
+form .champs {
+    width: fit-content;
+    display: inline-block;
+}
+form .champs input {
+    display: block;
+}

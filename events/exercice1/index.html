@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Exercice 1</title>
+        <style>
+            .product-card { width: 250px; border: 1px solid #eee; border-radius: 12px; padding: 15px; position: relative; overflow: hidden; transition: box-shadow 0.3s; }
+            .product-image { width: 100%; border-radius: 8px; }
+            .hidden { opacity: 0; transform: translateY(20px); pointer-events: none; transition: all 0.3s ease; }
+            .visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+            .add-to-cart-btn { width: 100%; padding: 10px; background: #000; color: #fff; border: none; border-radius: 6px; cursor: pointer; margin-top: 10px; }
+        </style>
+    </head>
+    <body>
+        <div class="product-card" id="card">
+            <img src="sneaker.jpg" alt="Sneaker X" class="product-image">
+            <div class="product-info">
+                <h3>Sneaker X-Pro</h3>
+                <p>1200 DH</p>
+            </div>
+            <button id="addBtn" class="add-to-cart-btn hidden">Ajouter au panier</button>
+        </div>
+        <script src="main.js"></script>
+    </body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atelier JavaScript : Événements</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        /* Styles personnalisés */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: #f8f9fa;
+        }
+        /* Menu latéral fixe sombre */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 280px;
+            background-color: #212529;
+            color: white;
+            padding: 20px;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+        .sidebar .nav-link {
+            color: #adb5bd;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            transition: all 0.3s ease;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            color: #fff;
+            background-color: #0d6efd;
+        }
+        /* Contenu principal */
+        .main-content {
+            margin-left: 280px;
+            padding: 40px;
+        }
+        /* Blocs de code stylisés */
+        pre {
+            background-color: #2b2b2b;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #444;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        }
+        /* Ajustement responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar shadow">
+        <h4 class="mb-4 text-center border-bottom pb-3">
+            <i class="fa-brands fa-js text-warning"></i> JS Events
+        </h4>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="#exo1"><i class="fa-solid fa-mouse-pointer me-2"></i> Exo 1 : Carte produit</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#exo2"><i class="fa-solid fa-star me-2"></i> Exo 2 : Notation étoiles</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#exo3"><i class="fa-solid fa-keyboard me-2"></i> Exo 3 : Command Palette</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#exo4"><i class="fa-solid fa-mobile-screen me-2"></i> Exo 4 : Code OTP</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#exo5"><i class="fa-solid fa-clipboard-check me-2"></i> Exo 5 : Formulaire</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <div class="container-fluid max-w-75">
+            <h1 class="mb-5 text-primary"><i class="fa-solid fa-laptop-code"></i> Travaux Pratiques : Événements JavaScript</h1>
+
+            <section id="exo1" class="mb-5 bg-white p-4 rounded shadow-sm border-start border-primary border-4">
+                <h2>Exercice 1 : La carte produit interactive <span class="badge bg-secondary fs-6 align-middle">MouseEvents</span></h2>
+                
+                <div class="alert alert-info mt-3">
+                    <strong><i class="fa-solid fa-briefcase"></i> Contexte professionnel :</strong> Vous développez le front-end d'un site e-commerce moderne. Pour épurer l'interface, le bouton "Ajouter au panier" n'apparaît que lorsque l'utilisateur survole l'image du produit avec sa souris.
+                </div>
+
+                <h5>Code fourni (HTML/CSS) :</h5>
+<pre><code>&lt;div class="product-card" id="card"&gt;
+    &lt;img src="sneaker.jpg" alt="Sneaker X" class="product-image"&gt;
+    &lt;div class="product-info"&gt;
+        &lt;h3&gt;Sneaker X-Pro&lt;/h3&gt;
+        &lt;p&gt;1200 DH&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;button id="addBtn" class="add-to-cart-btn hidden"&gt;Ajouter au panier&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+    .product-card { width: 250px; border: 1px solid #eee; border-radius: 12px; padding: 15px; position: relative; overflow: hidden; transition: box-shadow 0.3s; }
+    .product-image { width: 100%; border-radius: 8px; }
+    .hidden { opacity: 0; transform: translateY(20px); pointer-events: none; transition: all 0.3s ease; }
+    .visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .add-to-cart-btn { width: 100%; padding: 10px; background: #000; color: #fff; border: none; border-radius: 6px; cursor: pointer; margin-top: 10px; }
+&lt;/style&gt;</code></pre>
+
+                <div class="alert alert-warning mt-3">
+                    <strong><i class="fa-solid fa-code"></i> Travail demandé (JavaScript) :</strong><br>
+                    Écrivez le script permettant de :
+                    <ul class="mb-0 mt-2">
+                        <li>Détecter l'entrée de la souris (<code>mouseenter</code>) sur l'élément <code>.product-card</code> pour enlever la classe <code>hidden</code> et ajouter la classe <code>visible</code> au bouton.</li>
+                        <li>Détecter la sortie de la souris (<code>mouseleave</code>) pour faire l'inverse (cacher le bouton).</li>
+                        <li>Ajouter un événement de clic sur le bouton qui affiche une alerte : "Produit ajouté au panier !".</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="exo2" class="mb-5 bg-white p-4 rounded shadow-sm border-start border-primary border-4">
+                <h2>Exercice 2 : Système de notation par étoiles <span class="badge bg-secondary fs-6 align-middle">MouseEvents</span></h2>
+                
+                <div class="alert alert-info mt-3">
+                    <strong><i class="fa-solid fa-briefcase"></i> Contexte professionnel :</strong> Pour un site de réservation de restaurants, vous devez créer un composant permettant aux utilisateurs de laisser une note de 1 à 5 étoiles. Le composant doit réagir au survol pour montrer la note potentielle avant de cliquer.
+                </div>
+
+                <h5>Code fourni (HTML/CSS) :</h5>
+<pre><code>&lt;div class="rating-container" id="starRating"&gt;
+    &lt;span class="star" data-value="1"&gt;★&lt;/span&gt;
+    &lt;span class="star" data-value="2"&gt;★&lt;/span&gt;
+    &lt;span class="star" data-value="3"&gt;★&lt;/span&gt;
+    &lt;span class="star" data-value="4"&gt;★&lt;/span&gt;
+    &lt;span class="star" data-value="5"&gt;★&lt;/span&gt;
+&lt;/div&gt;
+&lt;p id="ratingText"&gt;Note : 0/5&lt;/p&gt;
+
+&lt;style&gt;
+    .star { font-size: 30px; color: #ccc; cursor: pointer; transition: color 0.2s; }
+    .star.hovered { color: #ffd700; } /* Jaune */
+    .star.selected { color: #ffaa00; } /* Orange foncé */
+&lt;/style&gt;</code></pre>
+
+                <div class="alert alert-warning mt-3">
+                    <strong><i class="fa-solid fa-code"></i> Travail demandé (JavaScript) :</strong><br>
+                    Écrivez le script permettant de :
+                    <ul class="mb-0 mt-2">
+                        <li>Au survol (<code>mouseover</code>) d'une étoile, ajouter la classe <code>hovered</code> à cette étoile et à toutes celles qui la précèdent.</li>
+                        <li>À la sortie de la souris (<code>mouseout</code>) du conteneur <code>#starRating</code>, retirer la classe <code>hovered</code> de toutes les étoiles.</li>
+                        <li>Au clic (<code>click</code>) sur une étoile, mémoriser la note, appliquer la classe <code>selected</code> aux bonnes étoiles, et mettre à jour le texte <code>#ratingText</code> (ex: "Note : 3/5").</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="exo3" class="mb-5 bg-white p-4 rounded shadow-sm border-start border-primary border-4">
+                <h2>Exercice 3 : La "Command Palette" type GitHub <span class="badge bg-secondary fs-6 align-middle">KeyboardEvents</span></h2>
+                
+                <div class="alert alert-info mt-3">
+                    <strong><i class="fa-solid fa-briefcase"></i> Contexte professionnel :</strong> Les applications SaaS modernes (comme Discord ou GitHub) permettent aux "power users" d'utiliser des raccourcis clavier. Vous devez ouvrir une barre de recherche rapide lorsque l'utilisateur appuie sur la touche Ctrl et la touche K en même temps.
+                </div>
+
+                <h5>Code fourni (HTML/CSS) :</h5>
+<pre><code>&lt;div id="searchModal" class="modal hide"&gt;
+    &lt;div class="modal-content"&gt;
+        &lt;input type="text" id="searchInput" placeholder="Rechercher... (Échap pour fermer)"&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Appuyez sur &lt;strong&gt;Ctrl + K&lt;/strong&gt; pour ouvrir la recherche.&lt;/p&gt;
+
+&lt;style&gt;
+    .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: flex-start; padding-top: 10vh; }
+    .modal-content { background: white; padding: 20px; border-radius: 8px; width: 400px; }
+    .modal input { width: 100%; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; }
+    .hide { display: none; }
+&lt;/style&gt;</code></pre>
+
+                <div class="alert alert-warning mt-3">
+                    <strong><i class="fa-solid fa-code"></i> Travail demandé (JavaScript) :</strong><br>
+                    Écrivez le script permettant de :
+                    <ul class="mb-0 mt-2">
+                        <li>Écouter l'événement <code>keydown</code> sur l'ensemble du document.</li>
+                        <li>Si les touches <strong>Ctrl</strong> et <strong>K</strong> sont pressées simultanément, empêcher le comportement par défaut du navigateur (<code>preventDefault()</code> pour éviter que la barre d'URL prenne le focus), enlever la classe <code>hide</code> de la modale et donner le focus (<code>focus()</code>) au champ <code>#searchInput</code>.</li>
+                        <li>Si la touche <strong>Escape</strong> est pressée, recacher la modale en ajoutant la classe <code>hide</code>.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="exo4" class="mb-5 bg-white p-4 rounded shadow-sm border-start border-primary border-4">
+                <h2>Exercice 4 : Saisie de code de vérification (OTP) <span class="badge bg-secondary fs-6 align-middle">KeyboardEvents</span></h2>
+                
+                <div class="alert alert-info mt-3">
+                    <strong><i class="fa-solid fa-briefcase"></i> Contexte professionnel :</strong> Lors de l'authentification à double facteur (2FA), l'utilisateur doit saisir un code à 4 chiffres reçu par SMS. Pour une meilleure expérience (UX), le curseur doit passer automatiquement à la case suivante après la frappe d'un chiffre.
+                </div>
+
+                <h5>Code fourni (HTML/CSS) :</h5>
+<pre><code>&lt;div class="otp-container" id="otpForm"&gt;
+    &lt;input type="text" class="otp-input" maxlength="1" pattern="[0-9]"&gt;
+    &lt;input type="text" class="otp-input" maxlength="1" pattern="[0-9]" disabled&gt;
+    &lt;input type="text" class="otp-input" maxlength="1" pattern="[0-9]" disabled&gt;
+    &lt;input type="text" class="otp-input" maxlength="1" pattern="[0-9]" disabled&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+    .otp-container { display: flex; gap: 10px; }
+    .otp-input { width: 40px; height: 50px; font-size: 24px; text-align: center; border: 2px solid #ccc; border-radius: 8px; outline: none; transition: border-color 0.3s; }
+    .otp-input:focus { border-color: #007bff; }
+&lt;/style&gt;</code></pre>
+
+                <div class="alert alert-warning mt-3">
+                    <strong><i class="fa-solid fa-code"></i> Travail demandé (JavaScript) :</strong><br>
+                    Écrivez le script permettant de :
+                    <ul class="mb-0 mt-2">
+                        <li>Cibler tous les champs <code>.otp-input</code>.</li>
+                        <li>Sur l'événement <code>keyup</code>, si l'utilisateur saisit un chiffre, activer le champ suivant (enlever l'attribut <code>disabled</code>) et lui donner le focus.</li>
+                        <li>Si l'utilisateur appuie sur la touche <strong>Backspace</strong> (Retour arrière), effacer le contenu du champ actuel, désactiver ce champ, et redonner le focus au champ précédent.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="exo5" class="mb-5 bg-white p-4 rounded shadow-sm border-start border-primary border-4">
+                <h2>Exercice 5 : Validation d'un formulaire d'inscription <span class="badge bg-secondary fs-6 align-middle">Form Events</span></h2>
+                
+                <div class="alert alert-info mt-3">
+                    <strong><i class="fa-solid fa-briefcase"></i> Contexte professionnel :</strong> Vous devez valider les données d'un formulaire côté client avant de les envoyer au serveur. Cela évite des requêtes inutiles et donne un retour immédiat à l'utilisateur si les règles de sécurité ne sont pas respectées.
+                </div>
+
+                <h5>Code fourni (HTML/CSS) :</h5>
+<pre><code>&lt;form id="registerForm" class="modern-form"&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label&gt;Nom d'utilisateur&lt;/label&gt;
+        &lt;input type="text" id="username"&gt;
+        &lt;span class="error-msg" id="errorName"&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="form-group"&gt;
+        &lt;label&gt;Mot de passe&lt;/label&gt;
+        &lt;input type="password" id="password"&gt;
+        &lt;span class="error-msg" id="errorPwd"&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;button type="submit"&gt;Créer mon compte&lt;/button&gt;
+&lt;/form&gt;
+&lt;div id="successMsg" class="success hide"&gt;Inscription réussie !&lt;/div&gt;
+
+&lt;style&gt;
+    .modern-form { max-width: 300px; display: flex; flex-direction: column; gap: 15px; }
+    .form-group { display: flex; flex-direction: column; }
+    input { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+    input.invalid { border-color: red; }
+    .error-msg { color: red; font-size: 12px; height: 15px; margin-top: 5px; }
+    .success { color: green; font-weight: bold; margin-top: 20px; }
+    .hide { display: none; }
+    button { padding: 10px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; }
+&lt;/style&gt;</code></pre>
+
+                <div class="alert alert-warning mt-3">
+                    <strong><i class="fa-solid fa-code"></i> Travail demandé (JavaScript) :</strong><br>
+                    Écrivez le script permettant de :
+                    <ul class="mb-0 mt-2">
+                        <li>Écouter l'événement <code>submit</code> sur le formulaire.</li>
+                        <li>Interrompre la soumission par défaut de la page (<code>preventDefault()</code>).</li>
+                        <li>Valider les champs selon ces règles :
+                            <ul>
+                                <li>Le Nom d'utilisateur doit contenir <strong>au moins 5 caractères</strong>. Si ce n'est pas le cas, afficher "Le nom doit contenir au moins 5 caractères" dans <code>#errorName</code> et ajouter la classe <code>invalid</code> au champ.</li>
+                                <li>Le Mot de passe doit contenir <strong>au moins 8 caractères</strong>. Sinon, afficher "Mot de passe trop court" dans <code>#errorPwd</code> et ajouter la classe <code>invalid</code>.</li>
+                            </ul>
+                        </li>
+                        <li>Si toutes les validations sont respectées, cacher le formulaire et afficher la div <code>#successMsg</code>. (Pensez à réinitialiser les erreurs à chaque nouvelle tentative de soumission).</li>
+                    </ul>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const sections = document.querySelectorAll("section");
+            const navLinks = document.querySelectorAll(".sidebar .nav-link");
+
+            window.addEventListener("scroll", () => {
+                let current = "";
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (scrollY >= sectionTop - 60) {
+                        current = section.getAttribute("id");
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove("active");
+                    if (link.getAttribute("href").includes(current)) {
+                        link.classList.add("active");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

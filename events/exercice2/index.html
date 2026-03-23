@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Exercice 2</title>
+        <style>
+            .star { font-size: 30px; color: #ccc; cursor: pointer; transition: color 0.2s; }
+            .star.hovered { color: #ffd700; } /* Jaune */
+            .star.selected { color: #ffaa00; } /* Orange foncé */
+        </style>
+    </head>
+    <body>
+        <div class="rating-container" id="starRating">
+            <span class="star" data-value="1">★</span>
+            <span class="star" data-value="2">★</span>
+            <span class="star" data-value="3">★</span>
+            <span class="star" data-value="4">★</span>
+            <span class="star" data-value="5">★</span>
+        </div>
+        <p id="ratingText">Note : 0/5</p>
+
+        <script src="main.js"></script>
+    </body>
+</html>

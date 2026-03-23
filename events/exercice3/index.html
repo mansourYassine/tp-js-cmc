@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Exercice 3</title>
+        <style>
+            .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: flex-start; padding-top: 10vh; }
+            .modal-content { background: white; padding: 20px; border-radius: 8px; width: 400px; }
+            .modal input { width: 100%; padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 4px; }
+            .hide { display: none; }
+        </style>
+    </head>
+    <body>
+        <div id="searchModal" class="modal hide">
+            <div class="modal-content">
+                <input type="text" id="searchInput" placeholder="Rechercher... (Échap pour fermer)">
+            </div>
+        </div>
+        <p>Appuyez sur <strong>Ctrl + K</strong> pour ouvrir la recherche.</p>
+        <script src="main.js"></script>
+    </body>
+</html>
